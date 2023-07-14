@@ -1,0 +1,3 @@
+# Exercise A
+
+`yarn dev`
