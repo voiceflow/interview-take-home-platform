@@ -2,10 +2,12 @@
   "name": "@voiceflow/interview-take-home",
   "version": "1.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "nest": "yarn workspace nest",
+    "express": "yarn workspace express"
+  },
   "workspaces": [
-    "exercises/*",
-    "resources/*"
+    "backend/*"
   ],
   "devDependencies": {
     "@types/node": "^20.4.2",

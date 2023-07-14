@@ -15,39 +15,10 @@
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    const getUserID = () => {
-      let userID = localStorage.getItem('vf-user-id');
-      if (userID) return userID;
-
-      userID = Math.random().toString(36).substring(7);
-      return setUserID(userID);
-    }
-
-    const setUserID = (userID) => {
-      localStorage.setItem('vf-user-id', userID);
-      return userID
-    }
-  </script>
 </head>
 
 <body>
-
   <div class="wrapper py-4">
-    <form id="account" class="bg-light rounded-lg p-2">
-      <div class="input-group  d-flex align-items-center">
-        <label for="username"><b>Username</b></label>
-        <input type="text" id="username"
-          onchange="setUserID(this.value)"
-          class="form-control border-0 py-1 bg-light">
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-link"> <i data-lucide="refresh-cw"></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="wrapper">
     <div class="rounded-lg overflow-hidden shadow">
       <!-- Chat Box-->
       <div>
@@ -69,9 +40,7 @@
     </div>
   </div>
   <script>lucide.createIcons();</script>
-  <script>
-    $('#username').val(getUserID());
-  </script>
+  <script src="./api.js"></script>
   <script src="./index.js"></script>
 </body>
 

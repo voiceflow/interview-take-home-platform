@@ -1,3 +1,0 @@
-# Exercise A
-
-`yarn dev`

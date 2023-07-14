@@ -1,5 +1,8 @@
 const $chat = $('#chat');
 
+const userID = 'bob';
+const diagramID = 'diagram-1';
+
 const getCurrentDate = () => {
   return new Date().toLocaleString("en-CA", {
     day: "numeric",
@@ -11,7 +14,7 @@ const getCurrentDate = () => {
   });
 }
 
-const addSenderMessage = (message, time = getCurrentDate()) => {
+const addBotMessage = (message, time = getCurrentDate()) => {
   $chat.prepend(`
     <div class="media w-33 mb-2 d-flex gap-2">
       <img
@@ -27,7 +30,7 @@ const addSenderMessage = (message, time = getCurrentDate()) => {
   `);
 };
 
-const addReceiverMessage = (message, time = getCurrentDate()) => {
+const addHumanMessage = (message, time = getCurrentDate()) => {
   $chat.prepend(`
     <div class="media w-50 ml-auto mb-2 align-self-end">
       <div class="media-body">
@@ -40,27 +43,7 @@ const addReceiverMessage = (message, time = getCurrentDate()) => {
   `);
 };
 
-$(document).ready(() => {
-  const userID = getUserID();
-
-  $.ajax({
-    url: `http://localhost:4000/message?userID=${userID}`,
-    type: 'get',
-    success: async (response) => {
-      for (const message of response.messages) {
-        console.log(message)
-        if (message.type === 'human') {
-          addReceiverMessage(message.message, message.time);
-        } else {
-          addSenderMessage(message.message, message.time);
-        }
-      }
-    },
-    error: (err) => {
-      console.error('Error while getting past messages', err);
-    },
-  });
-});
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 $('#message').submit(async (e) => {
   e.preventDefault();
@@ -71,28 +54,7 @@ $('#message').submit(async (e) => {
   $('#message-input').val('');
   if (!message) return false;
 
-  addReceiverMessage(message);
+  addHumanMessage(message);
 
-  const userID = getUserID();
-
-  $.ajax({
-    url: 'http://localhost:4000/message',
-    type: 'post',
-    data: {
-      userID,
-      message,
-    },
-    success: async (response) => {
-      for (const responseMessage of response.messages) {
-        if (responseMessage.type === 'human') {
-          addReceiverMessage(responseMessage.message, message.time);
-        } else {
-          addSenderMessage(responseMessage.message, message.time);
-        }
-      }
-    },
-    error: (err) => {
-      console.error('Error while sending message', err);
-    },
-  });
+  sendMessage(userID, message);
 });
