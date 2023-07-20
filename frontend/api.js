@@ -1,7 +1,7 @@
 function sendMessage(userID, message) {
   $.ajax({
-    url: `http://localhost:4000/conversation/${diagramID}`,
-    type: 'post',
+    url: `http://localhost:3000/conversation/${diagramID}`,
+    type: "post",
     data: {
       userID,
       message,
@@ -11,19 +11,25 @@ function sendMessage(userID, message) {
         await delay(100);
 
         switch (reply.type) {
-          case 'text': {
+          case "text": {
             addBotMessage(reply.text);
             break;
           }
+          case "url": {
+            addBotMessage('LINK: ' + reply.url);
+            break;
+          }
           default: {
-            addBotMessage(`I don't know how to handle that reply (${reply.type})`);
+            addBotMessage(
+              `I don't know how to handle that reply (${reply.type})`,
+            );
             break;
           }
         }
       }
     },
     error: (err) => {
-      console.error('Error while sending message', err);
+      console.error("Error while sending message", err);
     },
   });
 }

@@ -1,8 +1,7 @@
-export type Node =
-  | TextNode;
+export type Node = TextNode;
 
 export interface TextNode {
-  type: 'text';
+  type: "text";
   value: NodeMarkup;
 }
 

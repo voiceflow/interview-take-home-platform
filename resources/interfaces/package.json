@@ -1,0 +1,6 @@
+{
+  "name": "@resources/interface",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "main.ts"
+}
