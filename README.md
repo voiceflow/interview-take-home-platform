@@ -14,17 +14,19 @@ Provided are two templates using different frameworks: NestJS and Express (comin
 Create an endpoint to take in a message from the chat app. That endpoint should reference a `diagram` ID that you need to load from the resources. These resources are [just files](./resources/data/diagram.js), but treat this like you'd handle any other need for a database.
 
 Once you have the diagram, you need to follow the `nodes` within (starting from the `startNodeID`). Depending on the `type` of node you need to output a different `reply`. For now this only includes `text` nodes, but we would want to extend this in the future. You need to take the node type and process it to get a `reply` object back.
+
 > :information_source: Normally some natural language understanding would be applied to the message and the diagram would be processed differently depending on what was said. But for this exercise, we will just process all nodes in the diagram every time.
 
 You should return an array of each `reply` to the caller, following this example:
-```
+
+```ts
 {
   reply: [
     {
-      type: 'text',
-      text: 'Hello World!'
-    }
-  ]
+      type: "text",
+      text: "Hello World!",
+    },
+  ];
 }
 ```
 
@@ -36,7 +38,16 @@ When a message is received, we also need to send this off to an analytics servic
 
 ## Data Structures
 
-The data structures you'll be working with can be found in the [`interfaces` folder](backend/nest/src/conversation/interfaces).
+The data structures you'll be working with can be found in the [`resources` folder](backend/resources).
+
+These can be imported from the workspace packages, eg:
+
+```ts
+import diagramJSON from "@resources/data/diagram.json";
+import type { Diagram } from "@resources/interface";
+
+const diagram = diagramJSON as unknown as Diagram;
+```
 
 ## Setup
 
@@ -55,10 +66,10 @@ To start the development server use the `dev` command. For example: `yarn worksp
 Here's a few things we'll be looking for from your solution:
 
 1. Interface Design
-  - Do the API routes follow an established pattern like REST? Are interfaces consistent?
-1. Separation of Concerns
-  - Is each domain of the system outlined with a clear separation? Are functions not overloaded? Is the system extendable?
-1. "Build vs Buy"
-  - Where are existing libraries used vs custom solutions? What trade offs have been made?
+   - Do the API routes follow an established pattern like REST? Are interfaces consistent?
+2. Separation of Concerns
+   - Is each domain of the system outlined with a clear separation? Are functions not overloaded? Is the system extendable?
+3. "Build vs Buy"
+   - Where are existing libraries used vs custom solutions? What trade offs have been made?
 
 Don't hesitate to ask for clarification on any aspect. This isn't set up to trick you in any way. We want you to succeed and want an understanding of how you write code.

@@ -1,7 +1,7 @@
-const $chat = $('#chat');
+const $chat = $("#chat");
 
-const userID = 'bob';
-const diagramID = 'diagram-1';
+const userID = "bob";
+const diagramID = "diagram-1";
 
 const getCurrentDate = () => {
   return new Date().toLocaleString("en-CA", {
@@ -12,7 +12,7 @@ const getCurrentDate = () => {
     minute: "2-digit",
     second: "2-digit",
   });
-}
+};
 
 const addBotMessage = (message, time = getCurrentDate()) => {
   $chat.prepend(`
@@ -45,13 +45,13 @@ const addHumanMessage = (message, time = getCurrentDate()) => {
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-$('#message').submit(async (e) => {
+$("#message").submit(async (e) => {
   e.preventDefault();
 
   // grab form message
-  const message = $('#message-input').val().trim();
+  const message = $("#message-input").val().trim();
   // reset input field
-  $('#message-input').val('');
+  $("#message-input").val("");
   if (!message) return false;
 
   addHumanMessage(message);

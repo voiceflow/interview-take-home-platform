@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "nest": "yarn workspace nest",
-    "express": "yarn workspace express"
+    "express": "yarn workspace express",
+    "format": "yarn prettier . --write"
   },
   "workspaces": [
-    "backend/*"
+    "backend/*",
+    "resources/*"
   ],
   "devDependencies": {
     "@types/node": "^20.4.2",
+    "prettier": "^3.0.0",
     "source-map-support": "^0.5.21",
-    "typescript": "^5.1.6"
+    "typescript": "5.1.6"
   }
 }
